@@ -1,14 +1,13 @@
 import telebot
 import json
 from  telebot import types
-from colorama import init,Fore,Back,Style
 
-bot = telebot.TeleBot('6591712679:AAHos_1B0X6dlPdu42VyBQZjplLD-WPW5_4')
 
-admin_id = 2031479876
-sacha_id = 1214947339
-#admin_id = 1214947339
-#sacha_id = 2031479876
+bot = telebot.TeleBot('YOUR-TOKEN')
+
+admin_id = ID_USER1
+sacha_id = ID_USER2
+
 
 user_states = {}
 
