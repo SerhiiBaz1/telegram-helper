@@ -5,22 +5,17 @@ from  telebot import types
 
 bot = telebot.TeleBot('YOUR-TOKEN')
 
-admin_id = ID_USER1
-sacha_id = ID_USER2
-
-
-user_states = {}
-
-def is_admin(user_id):
-    return user_id == admin_id
-
-def is_sacha(user_id):
-    return user_id == sacha_id
 
 #admin--------------------
-@bot.message_handler(func=lambda message: is_admin(message.chat.id))
+@bot.message_handler()
 def start(message):
-    if message.text.lower() == '/start' or message.text.lower() == 'назад':
+    if message.text.lower() == 'start':
+        markup = types.ReplyKeyboardMarkup()
+        sts = types.KeyboardButton('Менеджер')
+        stss = types.KeyboardButton('Директор')
+        markup.row(sts,stss)
+        bot.send_message(message.chat.id, 'хто ви?')
+    elif message.text.lower() == 'менеджер' or message.text.lower() == 'назад':
 
         markup = types.ReplyKeyboardMarkup()
         sts = types.KeyboardButton('Керування номерами')
@@ -371,12 +366,8 @@ def start(message):
 
 
 
-#admin--------------------
-#sacha--------------------
-init(autoreset=True)
-@bot.message_handler(func=lambda message: is_sacha(message.chat.id))
-def info(message):
-    if message.text.lower() == '/start':
+
+    if message.text.lower() == 'директор':
         markup4 = types.ReplyKeyboardMarkup()
         sts = types.KeyboardButton('статус номерів')
         markup4.row(sts)
@@ -409,7 +400,7 @@ def info(message):
         elif key_cim1 == 'live':
             a = '<b>Номер 3 - Зайнятий 🔴</b>'
         bot.send_message(message.chat.id, a,parse_mode='html')
-        key_cim1 = data.get("cim4")
+        key_cim1 = data.get("cim4") 
         if key_cim1 == 'free':
             a = '<b>Номер 4 - Вільний🟢</b>'
         elif key_cim1 == 'reserv':
